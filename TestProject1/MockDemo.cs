@@ -53,6 +53,14 @@ namespace TestProject1
         }
 
         [Test]
+        public void DecimalDemo()
+        {
+            var @decimal = 0.66m;
+
+            Assert.That(@decimal, Is.EqualTo(0.6m).Within(0.06));
+        }
+
+        [Test]
         public void ArrayCountDemo()
         {
             var datas = new[]
