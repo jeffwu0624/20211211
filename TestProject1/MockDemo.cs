@@ -36,6 +36,20 @@ namespace TestProject1
             // FluentAssertions
             calculator.MultiInt(2).Should().Be(12);
         }
+
+        [Test]
+        public void ArrayCountDemo()
+        {
+            var datas = new []
+            {
+                1,2, 3, 4
+            };
+
+            datas.Should().OnlyContain(x => x > 0);
+            datas.Should().HaveCount(4, "應該要有4個數字");
+            
+            Assert.That(datas, Has.Length.EqualTo(4));
+        }
     }
 
     public interface INumberCreator
