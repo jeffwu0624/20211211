@@ -1,6 +1,9 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
+using FluentAssertions;
 using Moq;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace TestProject1
@@ -38,16 +41,28 @@ namespace TestProject1
         }
 
         [Test]
+        public void ThrowExceptionDemo()
+        {
+            var calculator = new NumberCalculator(new Mock<INumberCreator>().Object);
+
+            Assert.Throws<ArgumentNullException>(() => calculator.ThrowException(), "Test");
+
+            calculator.Invoking(x => x.ThrowException())
+                .Should().Throw<ArgumentNullException>();
+
+        }
+
+        [Test]
         public void ArrayCountDemo()
         {
-            var datas = new []
+            var datas = new[]
             {
                 1,2, 3, 4
             };
 
             datas.Should().OnlyContain(x => x > 0);
             datas.Should().HaveCount(4, "應該要有4個數字");
-            
+
             Assert.That(datas, Has.Length.EqualTo(4));
         }
     }
@@ -69,6 +84,11 @@ namespace TestProject1
         public int MultiInt(int multiple)
         {
             return _creator.CreateInt() * multiple;
+        }
+
+        public void ThrowException()
+        {
+            throw new ArgumentNullException("Test", "Test");
         }
     }
 }
