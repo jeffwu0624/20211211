@@ -1,10 +1,8 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
+using System;
 
 namespace TestProject1
 {
